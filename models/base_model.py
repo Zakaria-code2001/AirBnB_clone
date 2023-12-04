@@ -30,15 +30,15 @@ class BaseModel:
         """
         dictFormat = {}
         dictFormat["__class__"] = self.__class__.__name__
-        for key, val in self.__dict__.items():
-            if isinstance(val, datetime):
-                dictFormat[key] = val.isoformat()
+        for key, value in self.__dict__.items():
+            if isinstance(value, type(datetime)):
+                dictFormat[key] = value.isoformat()
             else:
-                dictFormat[key] = val
+                dictFormat[key] = value
         return dictFormat
 
     def __str__(self):
         """
         We are using the __str__ method to return a human readable or informal string representation of an object.
         """
-        return f'{self.__class__.__name__} {self.id} {self.__dict__} '
+        return f'{[self.__class__.__name__]} {(self.id)} {self.__dict__}'
