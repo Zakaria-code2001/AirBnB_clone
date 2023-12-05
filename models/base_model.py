@@ -3,6 +3,7 @@
 
 from datetime import datetime
 from uuid import uuid4
+from __init__ import storage
 
 
 class BaseModel:
@@ -12,10 +13,12 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        creating a BaseModel from a dictionary.
+        creating a BaseModel from a dictionary
         """
         if kwargs:
-            if "__class__" in kwargs:
+            if not kwargs:
+                storage.new(self)
+            elif "__class__" in kwargs:
                 del kwargs["__class__"]
                 for key, val in kwargs.items():
                     if key == 'updated_at' or key == 'created_at':
@@ -40,6 +43,7 @@ class BaseModel:
         This Method is used to update_at attribute with the current date and time using the datetime module
         """
         self.updated_at = datetime.now()
+        storage.save(self)
 
     def to_dict(self):
         """
