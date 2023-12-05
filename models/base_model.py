@@ -16,7 +16,7 @@ class BaseModel:
         creating a BaseModel from a dictionary
         """
         if kwargs:
-            if not kwargs:
+            if not args:
                 storage.new(self)
             elif "__class__" in kwargs:
                 del kwargs["__class__"]
