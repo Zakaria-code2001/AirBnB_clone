@@ -12,18 +12,24 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """
-        creating a public instance attribute with a random id generate by uuid4().
+        creating a BaseModel from a dictionary.
         """
         if kwargs:
             if "__class__" in kwargs:
                 del kwargs["__class__"]
                 for key, val in kwargs.items():
                     if key == 'updated_at' or key == 'created_at':
-                        setattr(self, key, datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f'))
+                        if isinstance(val, str):
+                            setattr(self, key, datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f'))
+                        else:
+                            setattr(self, key, val)
                     else:
-                        setattr(self, key, val)
+                            setattr(self, key, val)
             
         else:
+            """
+            creating a public instance attribute with a random id generate by uuid4().
+            """
             self.id = str(uuid4())
             self.created_at = datetime.now()
             self.updated_at = self.created_at
@@ -52,4 +58,4 @@ class BaseModel:
         """
         We are using the __str__ method to return a human readable or informal string representation of an object.
         """
-        return f'{[self.__class__.__name__]} {(self.id)} {self.__dict__}'
+        return f'{self.__class__.__name__} {self.id} {self.__dict__}'
