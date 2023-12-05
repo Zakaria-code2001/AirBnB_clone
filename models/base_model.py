@@ -10,13 +10,24 @@ class BaseModel:
     designing the baseModel Class with the instance attributes initialization
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         creating a public instance attribute with a random id generate by uuid4().
         """
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
+        if kwargs:
+            if "__class__" in kwargs:
+                del kwargs["__class__"]
+                for key, val in kwargs.items():
+                    if key == 'updated_at' or key == 'created_at':
+                        setattr(self, key, datetime.strptime(val, '%Y-%m-%dT%H:%M:%S.%f'))
+                    else:
+                        setattr(self, key, val)
+            
+        else:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = self.created_at
+
 
     def save(self):
         """
