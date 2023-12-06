@@ -31,7 +31,7 @@ class BaseModel:
         dictFormat = {}
         dictFormat["__class__"] = self.__class__.__name__
         for key, value in self.__dict__.items():
-            if isinstance(value, type(datetime)):
+            if isinstance(value, datetime):
                 dictFormat[key] = value.isoformat()
             else:
                 dictFormat[key] = value
@@ -41,4 +41,4 @@ class BaseModel:
         """
         We are using the __str__ method to return a human readable or informal string representation of an object.
         """
-        return f'{[self.__class__.__name__]} {(self.id)} {self.__dict__}'
+        return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
