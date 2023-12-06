@@ -43,7 +43,7 @@ class BaseModel:
         This Method is used to update_at attribute with the current date and time using the datetime module
         """
         self.updated_at = datetime.now()
-        storage.save(self)
+        storage.save()
 
     def to_dict(self):
         """
@@ -62,8 +62,5 @@ class BaseModel:
         """
         We are using the __str__ method to return a human readable or informal string representation of an object.
         """
-<<<<<<< HEAD
         return f'[{self.__class__.__name__}] ({self.id}) {self.__dict__}'
-=======
         return f'{self.__class__.__name__} {self.id} {self.__dict__}'
->>>>>>> 7ffb94a4b23ba3e3d91598cc373b207f34493afc
