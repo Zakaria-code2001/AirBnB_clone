@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import json
+import os
 
 
 class FileStorage:
@@ -14,13 +15,13 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        serialized_objects = {}
         for key, obj in self.__objects.items():
-            serialized_objects[key] = obj.to_dict()
-        with open(self.__file_path, 'w') as file:
-            json.dump(serialized_objects, file, default=str)
+            self.__objects[key] = obj.to_dict()
+            with open(self.__file_path, 'w') as file:
+                json.dump(self.__objects, file, default=str)
 
     def reload(self):
+        """
         try:
             with open(self.__file_path, 'r') as file:
                 loaded_objects = json.load(file)
@@ -33,3 +34,7 @@ class FileStorage:
 
         except FileNotFoundError:
             pass
+        """
+        if os.path.exists(self.__file_path):
+            with open(self.__file_path, 'r') as file:
+                self.__objects = json.load(file)
