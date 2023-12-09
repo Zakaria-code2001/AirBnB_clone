@@ -15,11 +15,15 @@ class FileStorage:
         self.__objects[key] = obj
 
     def save(self):
-        
         for key, obj in self.__objects.items():
-            self.__objects[key] = obj.to_dict()
+            if isinstance(obj, dict):
+                self.__objects[key] = obj
+            else:
+                self.__objects[key] = obj.to_dict()
+                
         with open(self.__file_path, 'w') as file:
             json.dump(self.__objects, file)
+
 
     def reload(self):
         """
@@ -38,4 +42,4 @@ class FileStorage:
         """
         if os.path.exists(self.__file_path):
             with open(self.__file_path, 'r') as file:
-                self.__objects = json.load(file)
+                self.__objects = json.load(file)    
