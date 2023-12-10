@@ -10,9 +10,9 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
-
+"""
 def parse(arg):
-    """Parsing method for instances"""
+    Parsing method for instances
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
     if curly_braces is None:
@@ -28,7 +28,7 @@ def parse(arg):
         retl = [i.strip(",") for i in lexer]
         retl.append(curly_braces.group())
         return retl
-
+"""
 
 class HBNBCommand(cmd.Cmd):
     """Defines the HBnB command interpreter.
