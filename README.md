@@ -30,34 +30,50 @@ To make sure our code is robust and dependable, we'll create thorough unit tests
 Execution
 Your shell should work like this in interactive mode:
 
+1 Command Interpreter (console.py)
+
+The command interpreter provides a user-friendly interface for interacting with the AirBnB clone. It allows users to create, update, and manage instances of various classes through a command-line interface.
+
+2 Key Features:
+- Create new instances of BaseModel and other classes
+- Update attributes of instances
+- Display information about instances
+- Delete instances
+
+4 How to Start the Command Interpreter
+
+To start the AirBnB clone command interpreter, run the following command:
+
+#bash
 $ ./console.py
-(hbnb) help
 
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
+5. How to Use the other Commands:
 
-(hbnb) 
-(hbnb) 
-(hbnb) quit
-$
-But also in non-interactive mode: (like the Shell project in C)
 
-$ echo "help" | ./console.py
-(hbnb)
+The command interpreter supports various commands, including:
 
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
-$
-$ cat test_help
-help
-$
-$ cat test_help | ./console.py
-(hbnb)
+- create: Create a new instance of a specified class.
+- show: Display information about a specific instance.
+- destroy: Delete an instance.
+- all: Display information about all instances or instances of a specific class.
+- update: Update the attributes of an instance.
 
-Documented commands (type help <topic>):
-========================================
-EOF  help  quit
-(hbnb) 
+Example Usage:
+
+some inputs:
+#bash
+$ create BaseModel
+$ show BaseModel 1234-5678
+$ all
+$ update BaseModel 1234-5678 name "New Name"
+$ destroy BaseModel 1234-5678
+
+
+some outputs:
+$ show BaseModel 49faff9a-6318-451f-87b6-910505c55907
+[BaseModel] (49faff9a-6318-451f-87b6-910505c55907) {'created_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903293), 'id': '49faff9a-6318-451f-87b6-910505c55907', 'updated_at': datetime.datetime(2017, 10, 2, 3, 10, 25, 903300)}
+
+
+
+
+
