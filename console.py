@@ -59,8 +59,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, args):
-        """Usage: create <class>
-        Create a new class instance and print its id.
+        """Create a new class instance and print its id.
         """
         words = parse(args)
         if len(words) == 0:
@@ -72,8 +71,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, args):
-        """Usage: show <class> <id> or <class>.show(<id>)
-        Display the string representation of a class instance of a given id.
+        """Display the string representation of a class instance of a given id.
         """
         words = parse(args)
         objects = storage.all()
@@ -89,8 +87,7 @@ class HBNBCommand(cmd.Cmd):
             print(objects["{}.{}".format(words[0], words[1])])
 
     def do_destroy(self, args):
-        """Usage: destroy <class> <id> or <class>.destroy(<id>)
-        Delete a class instance of a given id."""
+        """Delete a class instance of a given id."""
         words = parse(args)
         objects = storage.all()
         if len(words) == 0:
@@ -106,9 +103,7 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, args):
-        """Usage: all or all <class> or <class>.all()
-        Display string representations of all instances of a given class.
-        If no class is specified, displays all instantiated objects."""
+        """Display string representations of all instances of a given class."""
         words = parse(args)
         if len(words) > 0 and words[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
@@ -122,11 +117,7 @@ class HBNBCommand(cmd.Cmd):
             print(objects)
 
     def do_update(self, arg):
-        """Usage: update <class> <id> <attribute_name> <attribute_value> or
-       <class>.update(<id>, <attribute_name>, <attribute_value>) or
-       <class>.update(<id>, <dictionary>)
-        Update a class instance of a given id by adding or updating
-        a given attribute key/value pair or dictionary."""
+        """Update a class instance of a given id."""
         words = parse(arg)
         objects = storage.all()
 
@@ -151,7 +142,6 @@ class HBNBCommand(cmd.Cmd):
             except NameError:
                 print("** value missing **")
                 return False
-
         if len(words) == 4:
             obj = objects["{}.{}".format(words[0], words[1])]
             if words[2] in obj.__class__.__dict__.keys():
